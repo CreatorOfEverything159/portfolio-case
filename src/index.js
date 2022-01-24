@@ -1,4 +1,6 @@
 let data = []
+const PORT = 80
+const HOST = '165.22.251.103'
 
 const getData = (url) => {
     return new Promise((res, rej) => {
@@ -94,19 +96,23 @@ const createTable = (data) => {
     })
 }
 
+const addListeners = (data) => {
+    for (let i = 0; i < data.length; i++) {
+        const el = document.getElementById(`${i}`)
+        el.addEventListener('click', () => {
+            document.getElementById('main').style.display = 'none'
+            document.getElementById('resume').style.display = 'flex'
+            document.getElementById('resumeInner').innerHTML = createResume(data[i])
+        })
+    }
+}
+
 const init = () => {
-    getData('http://localhost:30000/api/people')
+    getData(`http://${HOST}:${PORT}/api/people`)
         .then(result => {
             createTable(result)
             data = result
-            for (let i = 0; i < result.length; i++) {
-                const el = document.getElementById(`${i}`)
-                el.addEventListener('click', () => {
-                    document.getElementById('main').style.display = 'none'
-                    document.getElementById('resume').style.display = 'flex'
-                    document.getElementById('resumeInner').innerHTML = createResume(data[i])
-                })
-            }
+            addListeners(data)
         })
 }
 
@@ -119,30 +125,38 @@ document.getElementById('toMain').addEventListener('click', () => {
 
 document.addEventListener('keyup', () => {
     if (document.activeElement.id === 'search__employee') {
-        findData('http://localhost:30000/api/find', document.getElementById('search__employee').value, 'fio')
+        findData(`http://${HOST}:${PORT}/api/find`, document.getElementById('search__employee').value, 'fio')
             .then(result => {
+                data = result
                 createTable(result)
+                addListeners(data)
             })
     }
 
     if (document.activeElement.id === 'search__position') {
-        findData('http://localhost:30000/api/find', document.getElementById('search__position').value, 'dolzhnost')
+        findData(`http://${HOST}:${PORT}/api/find`, document.getElementById('search__position').value, 'dolzhnost')
             .then(result => {
+                data = result
                 createTable(result)
+                addListeners(data)
             })
     }
 
     if (document.activeElement.id === 'search__school') {
-        findData('http://localhost:30000/api/find', document.getElementById('search__school').value, 'school')
+        findData(`http://${HOST}:${PORT}/api/find`, document.getElementById('search__school').value, 'school')
             .then(result => {
+                data = result
                 createTable(result)
+                addListeners(data)
             })
     }
 
     if (document.activeElement.id === 'search__spec') {
-        findData('http://localhost:30000/api/find', document.getElementById('search__spec').value, 'spec')
+        findData(`http://${HOST}:${PORT}/api/find`, document.getElementById('search__spec').value, 'spec')
             .then(result => {
+                data = result
                 createTable(result)
+                addListeners(data)
             })
     }
 })

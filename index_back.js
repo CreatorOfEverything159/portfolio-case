@@ -2,7 +2,7 @@ const path = require('path')
 const express = require('express')
 const personRouter = require('./routes/person.routes')
 const app = express()
-const PORT = 30000
+const PORT = 80
 
 app.use(express.static(path.join(__dirname, 'src')))
 app.use(express.json())
