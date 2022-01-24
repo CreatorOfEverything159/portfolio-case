@@ -5,7 +5,6 @@
     <title>Ваша организация | Портфолио сотрудников</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="img/icon.png">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -14,13 +13,13 @@
     <header class="header">
         <div class="header__wrapper">
             <div class="header__left">
-                <a href="#" class="logo">Ваша организация</a>
+                <a href="#" id="toMain" class="logo">Ваша организация</a>
             </div>
             <div class="header__right">Портфолио сотрудников</div>
         </div>
     </header>
 
-    <main class="content">
+    <main class="content" id="main">
         <div class="content__wrapper">
             <div class="search">
                 <div class="search__wrapper">
@@ -40,114 +39,21 @@
 
 
             <h2 class="table__name">Сотрудники Вашей организации</h2>
-            <table class="table">
+            <table class="table" id="table">
                 <tr>
                     <th>Сотрудник</th>
                     <th>Должность</th>
                     <th>Образовательное учреждение</th>
                     <th>Специализация</th>
                 </tr>
-                <tr>
-                    <td><a href="#">Погоришный Илья Константинович</a></td>
-                    <td>Библиотекарь</td>
-                    <td>АТШ</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>Теплинская Полина Алексеевна</td>
-                    <td>Заведующий кружковой деятельностью</td>
-                    <td>МБОУ СОШ №179</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>Паутова Дарина Максимовна</td>
-                    <td>Заведующий кружковой деятельностью</td>
-                    <td>Лицей Вторая школа</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>Цай Ксения Александровна</td>
-                    <td>Директор</td>
-                    <td>Школа Интеллектуал</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>Виноградова Анна Матвеевна</td>
-                    <td>Учитель</td>
-                    <td>Гимназия 9</td>
-                    <td>Учитель русского языка и литературы</td>
-                </tr>
-                <tr>
-                    <td>Горшков Илья Гордеевич</td>
-                    <td>Учитель</td>
-                    <td>Школа 1543</td>
-                    <td>Учитель физики</td>
-                </tr>
-                <tr>
-                    <td>Журавлев Александр Арсеньевич</td>
-                    <td>Учитель</td>
-                    <td>57 школа</td>
-                    <td>Учитель математики</td>
-                </tr>
-                <tr>
-                    <td>Ковалева Анастасия Львовна</td>
-                    <td>Учитель</td>
-                    <td>Академический лицей №5</td>
-                    <td>Учитель начальных классов</td>
-                </tr>
-                <tr>
-                    <td>Михайлова Светлана Захаровна</td>
-                    <td>Учитель</td>
-                    <td>Физико-математическая школа 31</td>
-                    <td>Учитель русского языка и литературы</td>
-                </tr>
-                <tr>
-                    <td>Павлова Анастасия Михайловна</td>
-                    <td>Учитель</td>
-                    <td>Президентский лицей 239</td>
-                    <td>Учитель химии</td>
-                </tr>
-                <tr>
-                    <td>Соловьева Ксения Тимофеевна</td>
-                    <td>Учитель</td>
-                    <td>Университетская гимназия МГУ</td>
-                    <td>Учитель русского языка и литературы</td>
-                </tr>
-                <tr>
-                    <td>Сорокина Алиса Викторовна</td>
-                    <td>Учитель</td>
-                    <td>Школа 1329</td>
-                    <td>Учитель начальных классов</td>
-                </tr>
-                <tr>
-                    <td>Михайлова Светлана Захаровна</td>
-                    <td>Учитель</td>
-                    <td>Физико-математическая школа 31</td>
-                    <td>Учитель начальных классов</td>
-                </tr>
-                <tr>
-                    <td>Павлова Анастасия Михайловна</td>
-                    <td>Учитель</td>
-                    <td>Президентский лицей 239</td>
-                    <td>Учитель физики</td>
-                </tr>
-                <tr>
-                    <td>Соловьева Ксения Тимофеевна</td>
-                    <td>Учитель</td>
-                    <td>Университетская гимназия МГУ</td>
-                    <td>Учитель русского языка и литературы</td>
-                </tr>
-                <tr>
-                    <td>Сорокина Алиса Викторовна</td>
-                    <td>Учитель</td>
-                    <td>Школа 1329</td>
-                    <td>Учитель химии</td>
-                </tr>
-
             </table>
 
             <div class="pagination"></div>
         </div>
+    </main>
+
+    <main class="content" style="display: none" id="resume">
+        <div class="content__wrapper" id="resumeInner"></div>
     </main>
 
     <footer class="footer">

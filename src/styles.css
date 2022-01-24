@@ -20,6 +20,10 @@ li {
     margin: 10px 0;
 }
 
+input {
+    padding: 5px;
+}
+
 .header, .footer {
     color: var(--color-font-main);
     background-color: var(--color-primary);
