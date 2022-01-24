@@ -12,6 +12,19 @@ const getData = (url) => {
     })
 }
 
+const findData = (url, whatFind, whereFind) => {
+    return new Promise((res, rej) => {
+        let xhr = new XMLHttpRequest()
+        xhr.open('POST', url)
+        xhr.setRequestHeader('Content-Type', 'application/json')
+        xhr.onload = () => {
+            if (xhr.status === 200) res(JSON.parse(xhr.response))
+            else rej(Error(`Error: ${xhr.statusText}`))
+        }
+        xhr.send(JSON.stringify({whatFind, whereFind}))
+    })
+}
+
 const setRow = (obj, id) => {
     return `
     <tr>
@@ -66,14 +79,25 @@ const createResume = (data) => {
     `
 }
 
-const init = () => {
+const createTable = (data) => {
     let table = document.getElementById('table')
+    table.innerHTML = `
+                <tr>
+                    <th>Сотрудник</th>
+                    <th>Должность</th>
+                    <th>Образовательное учреждение</th>
+                    <th>Специализация</th>
+                </tr>
+`
+    data.forEach((person, index) => {
+        table.innerHTML += setRow(person, index)
+    })
+}
+
+const init = () => {
     getData('http://localhost:30000/api/people')
         .then(result => {
-            table.innerHTML = ''
-            result.forEach((person, index) => {
-                table.innerHTML += setRow(person, index)
-            })
+            createTable(result)
             data = result
             for (let i = 0; i < result.length; i++) {
                 const el = document.getElementById(`${i}`)
@@ -91,4 +115,34 @@ init()
 document.getElementById('toMain').addEventListener('click', () => {
     document.getElementById('main').style.display = 'flex'
     document.getElementById('resume').style.display = 'none'
+})
+
+document.addEventListener('keyup', () => {
+    if (document.activeElement.id === 'search__employee') {
+        findData('http://localhost:30000/api/find', document.getElementById('search__employee').value, 'fio')
+            .then(result => {
+                createTable(result)
+            })
+    }
+
+    if (document.activeElement.id === 'search__position') {
+        findData('http://localhost:30000/api/find', document.getElementById('search__position').value, 'dolzhnost')
+            .then(result => {
+                createTable(result)
+            })
+    }
+
+    if (document.activeElement.id === 'search__school') {
+        findData('http://localhost:30000/api/find', document.getElementById('search__school').value, 'school')
+            .then(result => {
+                createTable(result)
+            })
+    }
+
+    if (document.activeElement.id === 'search__spec') {
+        findData('http://localhost:30000/api/find', document.getElementById('search__spec').value, 'spec')
+            .then(result => {
+                createTable(result)
+            })
+    }
 })
