@@ -61,7 +61,7 @@ const createBlock = (blockName, list) => {
 const yearName = (date) => {
     if (date % 10 === 1 && date !== 11) {
         return 'год'
-    }  else if ([11, 12, 13, 14].includes(date)) {
+    }  else if ([10, 11, 12, 13, 14].includes(date)) {
         return 'лет'
     } else if ([2, 3, 4].includes(date % 10) && ![12, 13, 14].includes(date)) {
         return 'года'
@@ -113,6 +113,7 @@ const addListeners = (data) => {
         el.addEventListener('click', () => {
             document.getElementById('main').style.display = 'none'
             document.getElementById('resume').style.display = 'block'
+            document.getElementById('toMain').style.display = 'block'
             document.getElementById('resumeInner').innerHTML = createResume(data[i])
         })
     }
@@ -132,6 +133,7 @@ init()
 document.getElementById('toMain').addEventListener('click', () => {
     document.getElementById('main').style.display = 'block'
     document.getElementById('resume').style.display = 'none'
+    document.getElementById('toMain').style.display = 'none'
 })
 
 document.addEventListener('keyup', () => {
