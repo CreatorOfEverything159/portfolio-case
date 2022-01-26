@@ -58,7 +58,18 @@ const createBlock = (blockName, list) => {
     `
 }
 
+const yearName = (date) => {
+    if (date % 10 === 1 && date !== 11) {
+        return 'год'
+    }  else if ([11, 12, 13, 14].includes(date)) {
+        return 'лет'
+    } else if ([2, 3, 4].includes(date % 10) && ![12, 13, 14].includes(date)) {
+        return 'года'
+    }
+}
+
 const createResume = (data) => {
+    let date = new Date().getFullYear() - new Date(data.stazh).getFullYear()
     return `
         <h1 class="title">${data.fio}</h1>
 
@@ -66,7 +77,7 @@ const createResume = (data) => {
             <img width="150px" class="info__image" src="${data.pic || ''}" alt="">
             <div class="info__right">
                 <div class="phone">Телефон: ${data.contacts || '-'}</div>
-                <div class="stazh">Стаж: ${(new Date().getFullYear() - new Date(data.stazh).getFullYear()) || '-'} лет</div>
+                <div class="stazh">Стаж: ${(date) || '-'} ${yearName(date)}</div>
                 <div class="school">Образовательная организация: ${data.school || '-'}</div>
                 <div class="dolzh">Должность: ${data.dolzhnost || '-'}</div>
             </div>
@@ -101,7 +112,7 @@ const addListeners = (data) => {
         const el = document.getElementById(`${i}`)
         el.addEventListener('click', () => {
             document.getElementById('main').style.display = 'none'
-            document.getElementById('resume').style.display = 'flex'
+            document.getElementById('resume').style.display = 'block'
             document.getElementById('resumeInner').innerHTML = createResume(data[i])
         })
     }
@@ -119,7 +130,7 @@ const init = () => {
 init()
 
 document.getElementById('toMain').addEventListener('click', () => {
-    document.getElementById('main').style.display = 'flex'
+    document.getElementById('main').style.display = 'block'
     document.getElementById('resume').style.display = 'none'
 })
 
